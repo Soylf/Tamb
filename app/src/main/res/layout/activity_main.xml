@@ -9,57 +9,53 @@
     tools:context=".activity.MainActivity"
     android:background="#222021">
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            android:backgroundTint="#D881A2"
-            android:onClick="getImageClick"
-            android:text="+"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:fontFamily="sans-serif-medium"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="44dp"
+        android:backgroundTint="#E8A2B5"
+        android:fontFamily="sans-serif"
+        android:onClick="downloadActivityClick"
+        android:text="+"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:backgroundTint="#E8A2B5"
-            android:text="++"
-            android:onClick="downloadActivityClick"
-            android:textColor="#000000"
-            android:textSize="20sp"
-            android:fontFamily="sans-serif"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="167dp"
-            android:layout_height="67dp"
-            android:layout_marginTop="15dp"
-            android:fontFamily="sans-serif-condensed"
-            android:text="Stylish Header"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="360dp"
-        android:layout_height="360dp"
-        android:layout_marginBottom="170dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="167dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="sans-serif-condensed"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:layout_width="393dp"
+        android:layout_height="498dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.712" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="29dp"
+        android:onClick="onCLicked"
+        android:text="Button"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
