@@ -4,19 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.tamb.R;
 import com.example.tamb.adapter.PhotoAdapter;
 import com.example.tamb.model.Photo;
 import com.example.tamb.model.SavedPhoto;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import lombok.NonNull;
 
 public class MainActivity extends AppCompatActivity {
     private List<Photo> photos;
@@ -34,9 +31,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onCLicked(View view) {
-        photos = SavedPhoto.getPhotosByPage(0, 20);
-        RecyclerView recyclerView = findViewById(R.id.list);
-        PhotoAdapter photoAdapter = new PhotoAdapter(photos, this);
-        recyclerView.setAdapter(photoAdapter);
+        ViewPager2 viewPager = findViewById(R.id.viewPager);
+        PhotoAdapter adapter = new PhotoAdapter(SavedPhoto.getPhotosByPage(0,20));
+        viewPager.setAdapter(adapter);
+
+        viewPager.setPageTransformer(new ViewPager2.PageTransformer() {
+            @Override
+            public void transformPage(@NonNull View page, float position) {
+                page.setTranslationX(-position * page.getWidth());
+                page.setAlpha(1 - Math.abs(position));
+            }
+        });
     }
 }

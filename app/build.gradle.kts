@@ -32,12 +32,12 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.lombok)
+    implementation(libs.androidx.viewpager2)
 
     annotationProcessor(libs.lombok)
 

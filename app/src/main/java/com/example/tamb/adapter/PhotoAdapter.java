@@ -1,6 +1,5 @@
 package com.example.tamb.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,17 +16,15 @@ import java.util.List;
 
 public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHolder> {
     private final List<Photo> photos;
-    private final LayoutInflater inflater;
 
-    public PhotoAdapter(List<Photo> photos, Context context) {
+    public PhotoAdapter(List<Photo> photos) {
         this.photos = photos;
-        this.inflater = LayoutInflater.from(context);
     }
 
     @NonNull
     @Override
     public PhotoAdapter.PhotoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.item_photo, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_photo, parent, false); //inflater.inflate(R.layout.item_photo, parent, false);
         return new PhotoViewHolder(view);
     }
 
