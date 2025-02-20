@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Tamb"
         tools:targetApi="31">
         <activity
+            android:name=".activity.TestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.ChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.DownloadActivity"
             android:exported="false" />
         <activity

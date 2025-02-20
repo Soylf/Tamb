@@ -2,6 +2,7 @@ package com.example.tamb.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void downloadActivityClick(View view) {
         Intent intent = new Intent(this, DownloadActivity.class);
+        startActivity(intent);
+    }
+
+    public void testOnClicked(View view) {
+        Intent intent = new Intent(this, TestActivity.class);
         startActivity(intent);
     }
 

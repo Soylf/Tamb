@@ -4,7 +4,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,8 +30,6 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHol
     @Override
     public void onBindViewHolder(@NonNull PhotoAdapter.PhotoViewHolder holder, int position) {
         Photo photo = photos.get(position);
-        holder.description.setText(photo.getDescription());
-        holder.name.setText(photo.getName());
         holder.imageView.setImageBitmap(photo.getImage());
     }
 
@@ -42,13 +39,10 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.PhotoViewHol
     }
 
     public static class PhotoViewHolder extends RecyclerView.ViewHolder {
-        TextView description, name;
         ImageView imageView;
 
         PhotoViewHolder(View view) {
             super(view);
-            description = view.findViewById(R.id.itemPhotoDescriptionView);
-            name = view.findViewById(R.id.itemPhotoNameView);
             imageView = view.findViewById(R.id.itemPhotoImageView);
         }
     }

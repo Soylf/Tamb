@@ -37,7 +37,7 @@
         <Button
             android:id="@+id/button2"
             android:layout_width="0dp"
-            android:layout_height="64dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
             android:backgroundTint="#E8A2B5"
@@ -45,19 +45,33 @@
             android:onClick="downloadActivityClick"
             android:text="Загрузить"
             android:textColor="#000000"
-            android:textSize="20sp" />
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="#77699E"
+            android:fontFamily="sans-serif"
+            android:onClick="testOnClicked"
+            android:text="тестовый полигон"
+            android:textColor="#000000"
+            android:textSize="15sp" />
 
         <Button
             android:id="@+id/button"
             android:layout_width="0dp"
-            android:layout_height="64dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
             android:backgroundTint="#A2D2E8"
             android:onClick="onClicked"
+            android:fontFamily="sans-serif"
             android:text="Вывести"
             android:textColor="#000000"
-            android:textSize="18sp" />
+            android:textSize="15sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
