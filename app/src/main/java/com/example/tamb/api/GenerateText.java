@@ -1,5 +1,9 @@
 package com.example.tamb.api;
 
+import com.example.tamb.model.Callback;
+import com.example.tamb.model.Constants;
+import com.example.tamb.model.UnsafeOkHttpClient;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,25 +19,18 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class GenerateText {
-    private static final String MODEL = "GigaChat";
-    private static final String TOKEN = "<ZTBjNGJkMTYtMjgzZS00MDdkLWI1MmMtZDRiZGEzZDY0OWNhOmQ4ZWVlNGQ3LTFhMDktNDE5Mi1iNGZhLTI3ZTRiMzllOGNkNA==>";
-    private static final String URL = "https://gigachat.devices.sberbank.ru/api/v1/chat/completions"; //https://gigachat.devices.sberbank.ru/api/v1/chat/completions
-    private static final OkHttpClient client = new OkHttpClient();
-
-    public interface Callback {
-        void onResponse(String response);
-        void onError(Exception e);
-    }
+    private static String token = "";
+    private static final OkHttpClient client = UnsafeOkHttpClient.getUnsafeOkHttpClient();
 
     public static void sendRequest(String text, Callback callback) {
         try {
             JSONObject jsonBody = getJsonObject(text);
             RequestBody body = RequestBody.create(jsonBody.toString(), MediaType.get("application/json"));
             Request request = new Request.Builder()
-                    .url(URL)
+                    .url(Constants.URL_CHAT.getValue())
                     .addHeader("Content-Type", "application/json")
                     .addHeader("Accept", "application/json")
-                    .addHeader("Authorization", "Bearer " + TOKEN)
+                    .addHeader("Authorization", "Bearer " + token)
                     .post(body)
                     .build();
 
@@ -61,7 +58,7 @@ public class GenerateText {
 
     private static @NonNull JSONObject getJsonObject(String text) throws JSONException {
         JSONObject jsonBody = new JSONObject();
-        jsonBody.put("model", MODEL);
+        jsonBody.put("model", Constants.MODEL.getValue());
         jsonBody.put("n", 1);
         jsonBody.put("stream", false);
         jsonBody.put("max_tokens", 512);
@@ -75,5 +72,11 @@ public class GenerateText {
         messages.put(message);
         jsonBody.put("messages", messages);
         return jsonBody;
+    }
+
+    public static void setToken(String num) {
+        if (num.isEmpty()) {
+            token = num;
+        }
     }
 }
