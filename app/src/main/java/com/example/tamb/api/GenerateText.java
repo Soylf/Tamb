@@ -17,9 +17,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public class GenerateText {
-    private static String token = "";
     private static final OkHttpClient client = UnsafeOkHttpClient.getUnsafeOkHttpClient();
 
     public static void sendRequest(String text, Callback callback) {
@@ -30,7 +30,7 @@ public class GenerateText {
                     .url(Constants.URL_CHAT.getValue())
                     .addHeader("Content-Type", "application/json")
                     .addHeader("Accept", "application/json")
-                    .addHeader("Authorization", "Bearer " + token)
+                    .addHeader("Authorization", "Bearer " + Constants.ACCESS_TOKEN.getValue())
                     .post(body)
                     .build();
 
@@ -41,11 +41,18 @@ public class GenerateText {
                 }
 
                 @Override
-                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                    if(response.isSuccessful() && response.body() != null) {
-                        callback.onResponse(response.body().string());
-                    }else {
-                        callback.onResponse("Что-то пошло не так");
+                public void onResponse(@NonNull Call call, @NonNull Response response) {
+                    try (ResponseBody responseBody = response.body()){
+                        if (response.isSuccessful() && responseBody != null) {
+                            JSONObject jsonResponse = new JSONObject(responseBody.string());
+                            String content = jsonResponse.getJSONArray("choices")
+                                    .getJSONObject(0)
+                                    .getJSONObject("message")
+                                    .getString("content");
+                            callback.onResponse(content);
+                        }
+                    }catch (Exception e) {
+                        callback.onError(new IOException("Unexpected response: " + response));
                     }
                 }
             });
@@ -72,11 +79,5 @@ public class GenerateText {
         messages.put(message);
         jsonBody.put("messages", messages);
         return jsonBody;
-    }
-
-    public static void setToken(String num) {
-        if (num.isEmpty()) {
-            token = num;
-        }
     }
 }
